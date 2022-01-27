@@ -12,6 +12,13 @@ async function run() {
 
     let platform = await system.getSystem();
     let version = versions.verify(requestedVersion, platform);
+    try {
+      const current = await getVersion();
+      if (current === version) {
+        core.setOutput("version", version);
+        return;
+      }
+    } catch {}
 
     switch (platform.os) {
       case system.OS.MacOS:
