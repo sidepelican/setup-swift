@@ -12,8 +12,12 @@ async function run() {
 
     let platform = await system.getSystem();
     let version = versions.verify(requestedVersion, platform);
+    
     try {
       const current = await getVersion();
+      if (current !== null) {
+        core.info(`current installed varsion: ${current}`)
+      }
       if (current === version) {
         core.setOutput("version", version);
         return;
