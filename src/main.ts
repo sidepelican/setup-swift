@@ -15,10 +15,8 @@ async function run() {
 
     try {
       const current = await getVersion();
-      if (current !== null) {
-        core.info(`current installed varsion: ${current}`);
-      }
       if (current === version) {
+        core.info(`${current} is already installed.`);
         core.setOutput("version", version);
         return;
       }

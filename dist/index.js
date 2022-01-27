@@ -2740,10 +2740,8 @@ function run() {
             let version = versions.verify(requestedVersion, platform);
             try {
                 const current = yield (0, get_version_1.getVersion)();
-                if (current !== null) {
-                    core.info(`current installed varsion: ${current}`);
-                }
                 if (current === version) {
+                    core.info(`${current} is already installed.`);
                     core.setOutput("version", version);
                     return;
                 }
