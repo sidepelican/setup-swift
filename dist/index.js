@@ -2738,6 +2738,17 @@ function run() {
             const requestedVersion = core.getInput("swift-version", { required: true });
             let platform = yield system.getSystem();
             let version = versions.verify(requestedVersion, platform);
+            try {
+                const current = yield (0, get_version_1.getVersion)();
+                if (current !== null) {
+                    core.info(`current installed varsion: ${current}`);
+                }
+                if (current === version) {
+                    core.setOutput("version", version);
+                    return;
+                }
+            }
+            catch (_a) { }
             switch (platform.os) {
                 case system.OS.MacOS:
                     yield macos.install(version, platform);
